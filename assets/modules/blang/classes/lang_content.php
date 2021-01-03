@@ -59,7 +59,12 @@ class lang_contentDocLister extends site_contentDocLister
 
 
                     if (!$this->bLang->isDefaultField($fieldFull)) {
-                        $docs[$key][$field] = $doc[$tvPrefix . $fieldFull];
+                        /* get field by 'default lang' if current field empty */
+                        if (empty($doc[$tvPrefix.$fieldFull])) {  
+                            $docs[$key][$field] = $doc[$field];
+                        } else {
+                            $docs[$key][$field] = $doc[$tvPrefix . $fieldFull];
+                        }
                     }
                 }
             }
